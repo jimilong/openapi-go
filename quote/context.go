@@ -513,6 +513,36 @@ func (c *QuoteContext) SecurityList(ctx context.Context, market openapi.Market, 
 	return
 }
 
+// MarketTemperature used to get market temperature. Doc: https://open.longportapp.com/en/docs/quote/pull/market_temp
+func (c *QuoteContext) MarketTemperature(ctx context.Context, market openapi.Market) (temperature *MarketTemperature, err error) {
+	var resp jsontypes.MarketTemperature
+	values := url.Values{}
+	values.Add("market", string(market))
+
+	err = c.opts.httpClient.Get(ctx, "/v1/quote/market_temperature", values, &resp)
+	if err != nil {
+		return
+	}
+	err = util.Copy(temperature, resp)
+	return
+}
+
+// HistoryMarketTemperature used to get history market temperature. Doc: https://open.longportapp.com/en/docs/quote/pull/history_market_temp
+func (c *QuoteContext) HistoryMarketTemperature(ctx context.Context, market openapi.Market, startDate time.Time, endDate time.Time) (history *HistoryMarketTemperature, err error) {
+	var resp jsontypes.HistoryMarketTemperature
+	values := url.Values{}
+	values.Add("market", string(market))
+	values.Add("start_date", startDate.Format("20060102"))
+	values.Add("end_date", endDate.Format("20060102"))
+
+	err = c.opts.httpClient.Get(ctx, "/v1/quote/history_market_temperature", values, &resp)
+	if err != nil {
+		return
+	}
+	err = util.Copy(history, resp)
+	return
+}
+
 // Close
 func (c *QuoteContext) Close() error {
 	return c.core.Close()

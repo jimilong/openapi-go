@@ -615,6 +615,12 @@ type SecurityCalcIndex struct {
 // Security is base info contains symbol and name
 type Security = jsontypes.Security
 
+// MarketTemperature is market temperature
+type MarketTemperature = jsontypes.MarketTemperature
+
+// HistoryMarketTemperature is history market temperature
+type HistoryMarketTemperature = jsontypes.HistoryMarketTemperature
+
 // doRatio process some ratio fields
 func doRatio(calcIndex *SecurityCalcIndex) {
 	calcIndex.ChangeRate = util.Percent(calcIndex.ChangeRate)

@@ -28,3 +28,23 @@ type Security struct {
 type SecurityList struct {
 	List []*Security
 }
+
+type MarketTemperature struct {
+	Temperature int32  `json:"temperature"`
+	Description string `json:"description"`
+	Valuation   int32  `json:"valuation"`
+	Sentiment   int32  `json:"sentiment"`
+	UpdatedAt   int64  `json:"updated_at,string"`
+}
+
+type TemperatureValue struct {
+	Timestamp int64  `json:"timestamp,string"`
+	Value     int32  `json:"value"`
+	Type      string `json:"type"`
+}
+
+type HistoryMarketTemperature struct {
+	Temperatures []*TemperatureValue `json:"temperatures"`
+	Valuations   []*TemperatureValue `json:"valuations"`
+	Sentiments   []*TemperatureValue `json:"sentiments"`
+}
