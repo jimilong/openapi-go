@@ -38,13 +38,13 @@ type MarketTemperature struct {
 }
 
 type TemperatureValue struct {
-	Timestamp int64  `json:"timestamp,string"`
-	Value     int32  `json:"value"`
-	Type      string `json:"type"`
+	Timestamp   int64 `json:"timestamp,string"`
+	Temperature int32 `json:"temperature"`
+	Valuation   int32 `json:"valuation"`
+	Sentiment   int32 `json:"sentiment"`
 }
 
 type HistoryMarketTemperature struct {
-	Temperatures []*TemperatureValue `json:"temperatures"`
-	Valuations   []*TemperatureValue `json:"valuations"`
-	Sentiments   []*TemperatureValue `json:"sentiments"`
+	List []*TemperatureValue `json:"list"`
+	Type string              `json:"type"`
 }
